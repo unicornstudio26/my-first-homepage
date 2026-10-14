@@ -1,94 +1,59 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#101525" />
-    <title>Hello, world!</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #101525;
-        color: #f7f8ff;
-      }
-
-      * { box-sizing: border-box; }
-
-      body {
-        min-height: 100vh;
-        margin: 0;
-        display: grid;
-        place-items: center;
-        padding: 24px;
-        background:
-          radial-gradient(ellipse at 50% 0%, rgba(116, 92, 255, 0.28), transparent 55%),
-          #101525;
-      }
-
-      main {
-        width: min(100%, 680px);
-        padding: clamp(36px, 8vw, 72px) 28px;
-        text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 28px;
-        background: rgba(255, 255, 255, 0.045);
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
-      }
-
-      .eyebrow {
-        margin: 0 0 18px;
-        color: #a99aff;
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(3rem, 11vw, 6rem);
-        line-height: 1;
-        letter-spacing: -0.07em;
-      }
-
-      h1 span {
-        color: #a99aff;
-      }
-
-      .message {
-        margin: 24px 0 0;
-        color: #b8bfd2;
-        font-size: clamp(1rem, 2.6vw, 1.2rem);
-        line-height: 1.6;
-      }
-
-      .sparkle {
-        display: inline-block;
-        margin-top: 32px;
-        font-size: 1.5rem;
-        animation: float 2.4s ease-in-out infinite;
-      }
-
-      @keyframes float {
-        50% { transform: translateY(-7px) rotate(8deg); }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          scroll-behavior: auto !important;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <p class="eyebrow">A little page, a big beginning</p>
-      <h1>Hello,<br /><span>world!</span></h1>
-      <p class="message">Your first page is ready. The next idea starts here.</p>
-      <span class="sparkle" aria-hidden="true">✦</span>
-    </main>
-  </body>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090e1d">
+<title>Breakout — 打磚塊</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#090e1d;color:#eef3ff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;padding:28px 18px;background-image:radial-gradient(ellipse at top,#20254a,transparent 65%)}main{max-width:960px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:24px}.label{font-size:11px;letter-spacing:.28em;color:#8c9abb;margin:0 0 6px}h1{font-size:clamp(28px,6vw,44px);letter-spacing:-.05em;margin:0}h1 span{color:#61edda}.tag{border:1px solid #35435c;border-radius:99px;padding:8px 12px;font-size:12px;color:#a9bbd8}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}.stat{padding:14px 18px;background:#141d30;border:1px solid #28354e;border-radius:12px}.stat small{display:block;color:#8c9abb;font-size:12px;margin-bottom:4px}.stat strong{font-variant-numeric:tabular-nums;font-size:24px}.board{position:relative;overflow:hidden;border:1px solid #35435c;border-radius:16px;box-shadow:0 24px 70px #0006}canvas{display:block;width:100%;height:auto;touch-action:none;background:#0c1425}.overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:#090e1ddd;backdrop-filter:blur(5px)}.overlay[hidden]{display:none}.overlay h2{font-size:clamp(24px,6vw,44px);margin:0 0 12px;letter-spacing:-.04em}.overlay p{color:#a9bbd8;line-height:1.8;max-width:420px;margin:0 0 24px}button{border:0;border-radius:9px;background:#61edda;color:#071c24;padding:12px 20px;font:700 14px system-ui;cursor:pointer}button:hover{filter:brightness(1.12)}button:focus-visible{outline:3px solid #fff;outline-offset:4px}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}.secondary{background:#1d2941;color:#d7e3fa;border:1px solid #35435c}.hint{color:#8c9abb;font-size:12px;line-height:1.8;margin-left:auto}footer{margin-top:22px;font-size:12px;color:#697d9c;text-align:center}@media(max-width:540px){body{padding:18px 10px}.tag{display:none}.stat{padding:10px 12px}.hint{width:100%;margin:0}.overlay p{font-size:13px}.overlay h2{margin-bottom:8px}.overlay p{margin-bottom:12px}}
+</style>
+</head>
+<body>
+<main>
+<header class="top"><div><p class="label">THE ARCADE / 01</p><h1>BREAK<span>OUT</span></h1></div><span class="tag">打磚塊 · 三關挑戰</span></header>
+<section class="stats" aria-label="遊戲狀態"><div class="stat"><small>分數 / SCORE</small><strong id="score">0</strong></div><div class="stat"><small>生命 / LIVES</small><strong id="lives">3</strong></div><div class="stat"><small>關卡 / LEVEL</small><strong id="level">1 / 3</strong></div></section>
+<div class="board"><canvas id="game" width="800" height="560" aria-label="打磚塊遊戲：使用左右方向鍵或滑鼠移動擋板，也可在遊戲區拖曳手指。">你的瀏覽器需要支援 Canvas 才能玩這個遊戲。</canvas><div class="overlay" id="overlay"><h2 id="title">準備好打破紀錄？</h2><p id="message">移動擋板接住球，清除所有磚塊。<br>三條生命、三個關卡，一場街機挑戰。</p><button id="action">開始遊戲 →</button></div></div>
+<div class="controls"><button class="secondary" id="pause">暫停</button><button class="secondary" id="restart">重新開始</button><span class="hint">← → / A D 移動 · 滑鼠 / 觸控拖曳 · 空白鍵發球 / 暫停</span></div>
+<footer>接住每一次反彈。再多打一塊。</footer>
+</main>
+<script>
+'use strict';
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
+const ui=Object.fromEntries(['score','lives','level','overlay','title','message','action','pause','restart'].map(id=>[id,document.getElementById(id)]));
+const W=800,H=560,R=8,paddle={x:340,y:520,w:120,h:12},ball={x:400,y:508,vx:0,vy:0};
+let score=0,lives=3,level=1,state='intro',bricks=[],particles=[],keys=new Set(),last=0;
+const colors=['#ff7e9e','#ffba75','#ffe28a','#61edda','#77b7ff','#b397ff'];
+function hud(){ui.score.textContent=score;ui.lives.textContent=lives;ui.level.textContent=level+' / 3';ui.pause.textContent=state==='paused'?'繼續':'暫停';}
+function overlay(title,message,label){ui.title.textContent=title;ui.message.textContent=message;ui.action.textContent=label;ui.overlay.hidden=false;hud();}
+function build(){bricks=[];let rows=level+3;for(let row=0;row<rows;row++)for(let col=0;col<10;col++)bricks.push({x:31+col*75,y:62+row*30,w:66,h:20,color:colors[row],alive:true});}
+function dock(){ball.x=paddle.x+paddle.w/2;ball.y=paddle.y-R-2;ball.vx=0;ball.vy=0;}
+function ready(){state='ready';dock();overlay('第 '+level+' 關','移動擋板選擇位置，再點擊下方按鈕或按空白鍵發球。','發球 →');}
+function reset(){score=0;lives=3;level=1;paddle.w=120;paddle.x=(W-paddle.w)/2;particles=[];build();ready();}
+function launch(){state='playing';const speed=330+level*35;ball.vx=speed*.35;ball.vy=-Math.sqrt(speed*speed-ball.vx*ball.vx);ui.overlay.hidden=true;hud();}
+function togglePause(){if(state==='playing'){state='paused';keys.clear();overlay('休息一下','準備好後，繼續你的挑戰。','繼續遊戲 →');}else if(state==='paused'){state='playing';ui.overlay.hidden=true;hud();}}
+function activate(){if(state==='intro'||state==='won'||state==='lost')reset();else if(state==='ready')launch();else if(state==='paused')togglePause();}
+ui.action.onclick=activate;ui.restart.onclick=reset;ui.pause.onclick=togglePause;
+window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();if(e.code==='Space'){if(e.target instanceof HTMLButtonElement)return;if(!e.repeat){if(state==='playing'||state==='paused')togglePause();else activate();}}else if(e.code==='Escape')togglePause();else keys.add(e.code);});
+window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>{keys.clear();if(state==='playing')togglePause();});
+function movePointer(e){const rect=canvas.getBoundingClientRect();paddle.x=Math.max(0,Math.min(W-paddle.w,(e.clientX-rect.left)*W/rect.width-paddle.w/2));if(state==='ready')dock();}
+canvas.addEventListener('pointermove',movePointer);canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);movePointer(e);});
+function burst(b){for(let i=0;i<9;i++)particles.push({x:b.x+b.w/2,y:b.y+b.h/2,vx:(Math.random()-.5)*220,vy:(Math.random()-.5)*220,t:.5,color:b.color});}
+function update(dt){if(state==='ready'||state==='playing'){const dir=(keys.has('ArrowRight')||keys.has('KeyD')?1:0)-(keys.has('ArrowLeft')||keys.has('KeyA')?1:0);paddle.x=Math.max(0,Math.min(W-paddle.w,paddle.x+dir*560*dt));if(state==='ready')dock();}if(state!=='playing')return;
+const steps=Math.ceil(dt/.004),step=dt/steps;
+for(let n=0;n<steps&&state==='playing';n++){
+ball.x+=ball.vx*step;ball.y+=ball.vy*step;
+if(ball.x<R){ball.x=R;ball.vx=Math.abs(ball.vx);}if(ball.x>W-R){ball.x=W-R;ball.vx=-Math.abs(ball.vx);}if(ball.y<R){ball.y=R;ball.vy=Math.abs(ball.vy);}
+if(ball.vy>0&&ball.y+R>=paddle.y&&ball.y-R<=paddle.y+paddle.h&&ball.x+R>=paddle.x&&ball.x-R<=paddle.x+paddle.w){const offset=Math.max(-1,Math.min(1,(ball.x-(paddle.x+paddle.w/2))/(paddle.w/2)));const speed=Math.hypot(ball.vx,ball.vy);const angle=offset*1.08;ball.vx=Math.sin(angle)*speed;ball.vy=-Math.cos(angle)*speed;ball.y=paddle.y-R;}
+for(const b of bricks){if(!b.alive)continue;const nx=Math.max(b.x,Math.min(ball.x,b.x+b.w)),ny=Math.max(b.y,Math.min(ball.y,b.y+b.h));if((ball.x-nx)**2+(ball.y-ny)**2<=R*R){b.alive=false;score+=10*level;burst(b);const px=Math.min(ball.x+R-b.x,b.x+b.w-(ball.x-R)),py=Math.min(ball.y+R-b.y,b.y+b.h-(ball.y-R));if(px<py)ball.vx=-ball.vx;else ball.vy=-ball.vy;hud();break;}}
+if(bricks.every(b=>!b.alive)){if(level===3){state='won';overlay('全部擊破！','你完成了三關挑戰，獲得 '+score+' 分。再來一場？','再玩一次 →');}else{level++;paddle.w-=10;build();ready();}break;}
+if(ball.y-R>H){lives--;if(lives===0){state='lost';overlay('遊戲結束','這次獲得 '+score+' 分。重新出發，挑戰更高分！','再試一次 →');}else ready();break;}
+}
+particles=particles.filter(p=>{p.t-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;return p.t>0;});}
+function draw(){ctx.clearRect(0,0,W,H);ctx.strokeStyle='#1b2940';ctx.lineWidth=1;for(let x=25;x<W;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=25;y<H;y+=50){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+for(const b of bricks){if(!b.alive)continue;ctx.fillStyle=b.color;ctx.beginPath();ctx.roundRect(b.x,b.y,b.w,b.h,4);ctx.fill();ctx.fillStyle='#ffffff35';ctx.fillRect(b.x+4,b.y+3,b.w-8,2);}
+for(const p of particles){ctx.globalAlpha=p.t/.5;ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,4,4);}ctx.globalAlpha=1;ctx.shadowColor='#61edda';ctx.shadowBlur=16;ctx.fillStyle='#61edda';ctx.beginPath();ctx.roundRect(paddle.x,paddle.y,paddle.w,paddle.h,6);ctx.fill();ctx.shadowColor='#fff';ctx.shadowBlur=12;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(ball.x,ball.y,R,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;}
+function frame(time){const dt=Math.min((time-last)/1000,.035);last=time;update(dt);draw();requestAnimationFrame(frame);}build();dock();requestAnimationFrame(frame);
+</script>
+</body>
 </html>
