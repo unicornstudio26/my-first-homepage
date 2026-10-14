@@ -112,13 +112,37 @@
         255
       ],
       "sha256": "8d754100b15ef64623bd8909c35f6eeb987a1d6806396c94d5729a9ffe41ddf7"
+    },
+    {
+      "file": "assets/guardian.png",
+      "size": [
+        720,
+        260
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "2bce81cfd0714bfb1911abebd72d9413c6b0561d087ddced9b842988479e326c"
     }
   ],
   "background": "assets/arena.webp",
   "source_layout_fix": "Repacked paddle ownership before slicing to preserve the full end cap.",
   "qa": {
     "status": "pass",
-    "sprite_count": 9,
+    "sprite_count": 10,
     "transparency_verified": true
+  },
+  "guardian_prompt": "artwork/guardian-prompt.txt",
+  "guardian_qa": {
+    "review": "source inspected visually; cropped and resized with premultiplied alpha",
+    "size": [
+      720,
+      260
+    ],
+    "alpha_range": [
+      0,
+      255
+    ]
   }
 }

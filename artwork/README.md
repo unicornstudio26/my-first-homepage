@@ -24,5 +24,8 @@ and produces `preview.png`, a composition at the game's actual display size.
 `assets/manifest.json` records sizes, SHA-256 hashes, route and runtime checks.
 The processing intermediates are ignored by Git.
 
-Run `node artwork/check_game.cjs` to check local asset references, bitmap
-rendering, loading errors/retry, pause, life loss and level progression.
+Run `node artwork/check_game.cjs` to check campaign progression, asset
+references, loading errors/retry, pause, life loss, Boss rules and physics
+playthroughs. Milestone 1 adds the Guardian sprite; its exact prompt is in
+`guardian-prompt.txt`, the generated source is in `assets/source/guardian.png`
+and the premultiplied-alpha runtime PNG is in `assets/guardian.png`.
