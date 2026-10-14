@@ -24,6 +24,23 @@ const ui=Object.fromEntries(['score','lives','level','overlay','title','message'
 const W=800,H=560,R=8,paddle={x:340,y:520,w:120,h:12},ball={x:400,y:508,vx:0,vy:0};
 let score=0,lives=3,level=1,state='intro',bricks=[],particles=[],keys=new Set(),last=0;
 const colors=['#ff7e9e','#ffba75','#ffe28a','#61edda','#77b7ff','#b397ff'];
+const art={};
+let artLoaded=false;
+const spriteNames=['brick-pink','brick-orange','brick-yellow','brick-cyan','brick-blue','brick-purple','paddle','ball','spark','arena'];
+async function loadArt(){
+artLoaded=false;ui.action.disabled=true;
+overlay('素材載入中…','正在準備遊戲畫面。','載入中…');
+try{
+await Promise.all(spriteNames.map(async name=>{
+const image=new Image();
+await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=()=>reject(new Error(name));image.src='assets/'+name+(name==='arena'?'.webp':'.png');});
+art[name]=image;
+}));
+artLoaded=true;state='intro';
+overlay('準備好打破紀錄？','移動擋板接住球，清除所有寶石磚塊。三條生命、三個關卡，一場街機挑戰。','開始遊戲 →');
+}catch(error){state='asset-error';overlay('素材載入失敗','請檢查網路連線，再試一次。','重新載入');}
+ui.action.disabled=false;
+}
 function hud(){ui.score.textContent=score;ui.lives.textContent=lives;ui.level.textContent=level+' / 3';ui.pause.textContent=state==='paused'?'繼續':'暫停';}
 function overlay(title,message,label){ui.title.textContent=title;ui.message.textContent=message;ui.action.textContent=label;ui.overlay.hidden=false;hud();}
 function build(){bricks=[];let rows=level+3;for(let row=0;row<rows;row++)for(let col=0;col<10;col++)bricks.push({x:31+col*75,y:62+row*30,w:66,h:20,color:colors[row],alive:true});}
@@ -32,8 +49,8 @@ function ready(){state='ready';dock();overlay('第 '+level+' 關','移動擋板�
 function reset(){score=0;lives=3;level=1;paddle.w=120;paddle.x=(W-paddle.w)/2;particles=[];build();ready();}
 function launch(){state='playing';const speed=330+level*35;ball.vx=speed*.35;ball.vy=-Math.sqrt(speed*speed-ball.vx*ball.vx);ui.overlay.hidden=true;hud();}
 function togglePause(){if(state==='playing'){state='paused';keys.clear();overlay('休息一下','準備好後，繼續你的挑戰。','繼續遊戲 →');}else if(state==='paused'){state='playing';ui.overlay.hidden=true;hud();}}
-function activate(){if(state==='intro'||state==='won'||state==='lost')reset();else if(state==='ready')launch();else if(state==='paused')togglePause();}
-ui.action.onclick=activate;ui.restart.onclick=reset;ui.pause.onclick=togglePause;
+function activate(){if(state==='asset-error'){loadArt();return;}if(!artLoaded)return;if(state==='intro'||state==='won'||state==='lost')reset();else if(state==='ready')launch();else if(state==='paused')togglePause();}
+ui.action.onclick=activate;ui.restart.onclick=()=>{if(artLoaded)reset();};ui.pause.onclick=togglePause;
 window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();if(e.code==='Space'){if(e.target instanceof HTMLButtonElement)return;if(!e.repeat){if(state==='playing'||state==='paused')togglePause();else activate();}}else if(e.code==='Escape')togglePause();else keys.add(e.code);});
 window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>{keys.clear();if(state==='playing')togglePause();});
 function movePointer(e){const rect=canvas.getBoundingClientRect();paddle.x=Math.max(0,Math.min(W-paddle.w,(e.clientX-rect.left)*W/rect.width-paddle.w/2));if(state==='ready')dock();}
@@ -50,10 +67,11 @@ if(bricks.every(b=>!b.alive)){if(level===3){state='won';overlay('全部擊破！
 if(ball.y-R>H){lives--;if(lives===0){state='lost';overlay('遊戲結束','這次獲得 '+score+' 分。重新出發，挑戰更高分！','再試一次 →');}else ready();break;}
 }
 particles=particles.filter(p=>{p.t-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;return p.t>0;});}
-function draw(){ctx.clearRect(0,0,W,H);ctx.strokeStyle='#1b2940';ctx.lineWidth=1;for(let x=25;x<W;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=25;y<H;y+=50){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-for(const b of bricks){if(!b.alive)continue;ctx.fillStyle=b.color;ctx.beginPath();ctx.roundRect(b.x,b.y,b.w,b.h,4);ctx.fill();ctx.fillStyle='#ffffff35';ctx.fillRect(b.x+4,b.y+3,b.w-8,2);}
-for(const p of particles){ctx.globalAlpha=p.t/.5;ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,4,4);}ctx.globalAlpha=1;ctx.shadowColor='#61edda';ctx.shadowBlur=16;ctx.fillStyle='#61edda';ctx.beginPath();ctx.roundRect(paddle.x,paddle.y,paddle.w,paddle.h,6);ctx.fill();ctx.shadowColor='#fff';ctx.shadowBlur=12;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(ball.x,ball.y,R,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;}
-function frame(time){const dt=Math.min((time-last)/1000,.035);last=time;update(dt);draw();requestAnimationFrame(frame);}build();dock();requestAnimationFrame(frame);
+function draw(){ctx.clearRect(0,0,W,H);if(!artLoaded)return;ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(art.arena,0,0,W,H);
+for(const b of bricks){if(!b.alive)continue;ctx.drawImage(art[spriteNames[colors.indexOf(b.color)]],b.x,b.y,b.w,b.h);}
+for(const p of particles){ctx.globalAlpha=p.t/.5;ctx.drawImage(art.spark,p.x-6,p.y-6,12,12);}ctx.globalAlpha=1;
+ctx.drawImage(art.paddle,paddle.x,paddle.y,paddle.w,paddle.h);ctx.drawImage(art.ball,ball.x-R,ball.y-R,R*2,R*2);}
+function frame(time){const dt=Math.min((time-last)/1000,.035);last=time;update(dt);draw();requestAnimationFrame(frame);}build();dock();loadArt();requestAnimationFrame(frame);
 </script>
 </body>
 </html>

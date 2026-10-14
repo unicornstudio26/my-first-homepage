@@ -1,0 +1,124 @@
+{
+  "art_source": "host_image",
+  "route": "Codex native image_gen",
+  "model": "not exposed by tool",
+  "estimateUsd": null,
+  "finish": "hd",
+  "runtime_assets": [
+    {
+      "file": "assets\\brick-pink.png",
+      "size": [
+        132,
+        40
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "80ac9d92cf00a3f058862425368dcb2d566a913585f15d790ce8ffdd57db6a4c"
+    },
+    {
+      "file": "assets\\brick-orange.png",
+      "size": [
+        132,
+        40
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "54a3bba01aa390bfb448eac65f650d4cef7e8dc304f03eb16865978d485f1498"
+    },
+    {
+      "file": "assets\\brick-yellow.png",
+      "size": [
+        132,
+        40
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "3e528b2a0aa3106ee9dd2faebfd503ea4c5f2b3bc51030d11de37d4e85ce797e"
+    },
+    {
+      "file": "assets\\brick-cyan.png",
+      "size": [
+        132,
+        40
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "6cc275de200c45f2b21fc5aaadaa1c7cc6bb07bc2e905de64aa3a93618f27fef"
+    },
+    {
+      "file": "assets\\brick-blue.png",
+      "size": [
+        132,
+        40
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "4bf1a447d33133bfcb78f5399ebff7029bf30d63246a5d04492b603e5c830769"
+    },
+    {
+      "file": "assets\\brick-purple.png",
+      "size": [
+        132,
+        40
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "6c993027d1ec00b3dc3abc9dc526a3a529209e06fded79edd9dff61da0d6f242"
+    },
+    {
+      "file": "assets\\paddle.png",
+      "size": [
+        240,
+        24
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "d94b0d207637fd74b7bd234db3c872fc4feb7c22fd61fe2a9e854c66617cd4ae"
+    },
+    {
+      "file": "assets\\ball.png",
+      "size": [
+        32,
+        32
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "70409b750b1b1a6233c57e713071d143f33e87a5920a1c2918f6191988b43619"
+    },
+    {
+      "file": "assets\\spark.png",
+      "size": [
+        24,
+        24
+      ],
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "8d754100b15ef64623bd8909c35f6eeb987a1d6806396c94d5729a9ffe41ddf7"
+    }
+  ],
+  "background": "assets/arena.webp",
+  "source_layout_fix": "Repacked paddle ownership before slicing to preserve the full end cap.",
+  "qa": {
+    "status": "pass",
+    "sprite_count": 9,
+    "transparency_verified": true
+  }
+}
